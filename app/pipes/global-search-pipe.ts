@@ -16,6 +16,7 @@ export class GlobalSearchPipe {
             return dataArr;
         }
         this.resource.data = [];
+
         dataArr.forEach((row) => {
             for (var value in row) {
                 if (row.hasOwnProperty(value)) {
@@ -40,6 +41,7 @@ export class GlobalSearchPipe {
                 }
             }
         });
+        this.resource.emitResourceChangeEvent();
 
         return this.resource.data;
     }

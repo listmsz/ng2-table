@@ -1,4 +1,4 @@
-import {Component} from 'angular2/core';
+import {Component, OnInit, OnDestroy} from 'angular2/core';
 
 import {FiltersService} from "./services/filters-service";
 import {SearchPipe} from "./pipes/header-pipe";
@@ -12,27 +12,41 @@ import {HTTP_PROVIDERS} from 'angular2/http';
 import 'rxjs/add/operator/map';
 import {GlobalSearch} from "./components/global-search/global-search.component";
 import {GlobalSearchPipe} from "./pipes/global-search-pipe";
+import {FooterComponent} from "./components/footer/footer.component";
 
 @Component({
     selector: 'ng2-table',
     bindings: [HttpService],
     templateUrl: 'app/table.html',
-    directives: [Header, GlobalSearch],
+    directives: [Header, GlobalSearch, FooterComponent],
     pipes: [SearchPipe, GlobalSearchPipe],
     styleUrls: ['app/table.css']
 })
 
-export class AppComponent {
+export class AppComponent implements OnInit, OnDestroy{
     constructor(public filtersService:FiltersService,
                 public config:ConfigService,
                 public resource:ResourceService,
-                public httpService:HttpService
-    ) {
+                public httpService:HttpService) {
         httpService.getData()
             .subscribe(res => {
                 this.data = res;
                 this.keys = Object.keys(this.data[0]);
             });
+    }
+
+    subscription: any;
+
+    ngOnInit() {
+        this.subscription = this.resource.getResourceChangeEmitter()
+            .subscribe(item => {
+                console.log("got event: ", item);
+                this.resource.footerSummary();
+            });
+    }
+
+    ngOnDestroy() {
+        this.subscription.unsubscribe();
     }
 
     public data:Array<>;

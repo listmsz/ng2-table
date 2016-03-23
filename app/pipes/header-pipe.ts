@@ -41,6 +41,7 @@ export class SearchPipe {
                 }
             }
         });
+        this.resource.emitResourceChangeEvent();
 
         return this.resource.data;
     }

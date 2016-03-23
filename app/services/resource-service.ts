@@ -1,12 +1,18 @@
-import {Injectable} from "angular2/core";
+import {Injectable, EventEmitter} from "angular2/core";
 @Injectable()
 export class ResourceService {
+    resourceChange: EventEmitter<boolean> = new EventEmitter();
+    constructor() {}
     public data = [];
     public key:String;
     public order = [];
-    public footerSummary = () => {
-
-    };
+    public footer = [];
+    public emitResourceChangeEvent() {
+        this.resourceChange.emit(true);
+    }
+    public getResourceChangeEmitter() {
+        return this.resourceChange;
+    }
     public getOrder = () => {
         return this.order[this.key];
     };
@@ -24,6 +30,21 @@ export class ResourceService {
             this.order[this.key] = 'asc';
             this.data.sort((a, b) => this.compare(b, a));
         }
+    };
+
+    public footerSummary = () => {
+        this.data.forEach((row) => {
+            for (var value in row) {
+                if (row.hasOwnProperty(value)) {
+                    if (typeof row[value] === "number") {
+                        this.footer[value] = row[value] + this.footer[value];
+                    } else {
+                        this.footer[value] = "";
+                    }
+                }
+            }
+        });
+        console.log("footer", this.footer);
     };
 
     private compare = (a, b) => {

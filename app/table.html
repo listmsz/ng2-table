@@ -35,9 +35,5 @@
         </td>
     </tr>
     </tbody>
-    <tfoot *ngIf="config.footerEnabled">
-    <tr>
-       <td *ngFor="#key of keys"></td><td></td>
-    </tr>
-    </tfoot>
 </table>
+<table-footer *ngIf="config.footerEnabled"></table-footer>
