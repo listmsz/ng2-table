@@ -35,5 +35,9 @@
         </td>
     </tr>
     </tbody>
+
+<table-footer *ngIf="config.footerEnabled" [footer]="footer"></table-footer>
 </table>
-<table-footer *ngIf="config.footerEnabled"></table-footer>
+1. {{ footer }} <br>
+2. {{ data }} <br>
+3. {{ keys }}

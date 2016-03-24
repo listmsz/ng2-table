@@ -23,34 +23,39 @@ import {FooterComponent} from "./components/footer/footer.component";
     styleUrls: ['app/table.css']
 })
 
-export class AppComponent implements OnInit, OnDestroy{
+export class AppComponent  {
     constructor(public filtersService:FiltersService,
                 public config:ConfigService,
                 public resource:ResourceService,
                 public httpService:HttpService) {
+
         httpService.getData()
             .subscribe(res => {
                 this.data = res;
                 this.keys = Object.keys(this.data[0]);
+                this.resource.data = this.data;
+                this.footer = this.resource.footerSummary();
+                // this.footer = this.resource.footer;
+                console.log("footer: ", this.footer);
             });
     }
 
-    subscription: any;
+    subscription:any;
 
-    ngOnInit() {
-        this.subscription = this.resource.getResourceChangeEmitter()
-            .subscribe(item => {
-                console.log("got event: ", item);
-                this.resource.footerSummary();
-            });
-    }
+    // ngOnInit() {
+    //     this.subscription = this.resource.getResourceChangeEmitter()
+    //         .subscribe(item => {
 
-    ngOnDestroy() {
-        this.subscription.unsubscribe();
-    }
+    //         });
+    // }
+
+    // ngOnDestroy() {
+    //     this.subscription.unsubscribe();
+    // }
 
     public data:Array<>;
     public keys:Array<>;
+    public footer:Array<>;
     public orderBy = (key) => {
         this.resource.sortBy(key);
     };

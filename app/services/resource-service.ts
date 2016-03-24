@@ -33,10 +33,15 @@ export class ResourceService {
     };
 
     public footerSummary = () => {
+        this.footer = [];
+        console.log("trying calculate footer:", this.data);
         this.data.forEach((row) => {
             for (var value in row) {
                 if (row.hasOwnProperty(value)) {
                     if (typeof row[value] === "number") {
+                        if(typeof this.footer[value] === "undefined") {
+                            this.footer[value] = 0;
+                        }
                         this.footer[value] = row[value] + this.footer[value];
                     } else {
                         this.footer[value] = "";
@@ -44,7 +49,8 @@ export class ResourceService {
                 }
             }
         });
-        console.log("footer", this.footer);
+        console.log("rendered: ", this.footer);
+        return this.footer;
     };
 
     private compare = (a, b) => {
