@@ -50,5 +50,6 @@ export class ConfigService {
 |---------------------|:--------------:|:----------:|---------------------------------------------|
 | searchEnabled       | bool           | true false | public searchEnabled = true;                |
 | orderEnabled        | bool           | true false | public orderEnabled = true;                 |
+| paginationEnabled   | bool           | true false | public paginationEnabled = true;            |
 | globalSearchEnabled | bool           | true false | public globalSearchEnabled = true;          |
 | resourceUrl         | string         |            | public resourceUrl = "api/v1/persons.json"; |

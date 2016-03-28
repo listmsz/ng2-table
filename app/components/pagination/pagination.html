@@ -1,0 +1,21 @@
+<ul class="pagination ng2-table-pagination">
+  <li [class.disabled]="isFirstPage()">
+    <a href="#" (click)="previousPage()">«</a>
+  </li>
+
+  <li *ngFor="#page of pageNumbers" [class.active]="isActivePage(page)">
+    <a href="#" (click)="changePage(page)">{{page}}</a>
+  </li>
+
+  <li [class.disabled]="isLastPage()">
+    <a href="#" (click)="nextPage()">»</a>
+  </li>
+</ul>
+
+<ul class="btn-group pull-right">
+  <button (click)="changeRange(5)" [class.active]="isActiveRange(5)" class="btn btn-default">5</button>
+  <button (click)="changeRange(10)" [class.active]="isActiveRange(10)" class="btn btn-default">10</button>
+  <button (click)="changeRange(25)" [class.active]="isActiveRange(25)" class="btn btn-default">25</button>
+  <button (click)="changeRange(50)" [class.active]="isActiveRange(50)" class="btn btn-default">50</button>
+  <button (click)="changeRange(100)" [class.active]="isActiveRange(100)" class="btn btn-default">100</button>
+</ul>
