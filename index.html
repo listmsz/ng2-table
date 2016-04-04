@@ -2,7 +2,7 @@
 <head>
     <title>Angular 2 easy table</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="app/styles/main.css">
+    <link rel="stylesheet" href="dist/app/styles/main.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 </head>
 
@@ -11,16 +11,13 @@
     <div class="ng2-table-demo">
         <ng2-table></ng2-table>
     </div>
-    <script src="node_modules/es6-shim/es6-shim.min.js"></script>
-    <script src="node_modules/systemjs/dist/system-polyfills.js"></script>
-    <script src="node_modules/angular2/es6/dev/src/testing/shims_for_IE.js"></script>
-
-    <script src="node_modules/angular2/bundles/angular2-polyfills.js"></script>
-    <script src="node_modules/systemjs/dist/system.src.js"></script>
-    <script src="node_modules/rxjs/bundles/Rx.js"></script>
-    <script src="node_modules/angular2/bundles/angular2.dev.js"></script>
-    <script src="node_modules/angular2/bundles/http.dev.js"></script>
-
+    <script src="dist/lib/es6-shim.js"></script>
+    <script src="dist/lib/system-polyfills.js"></script>
+    <script src="dist/lib/angular2-polyfills.js"></script>
+    <script src="dist/lib/system.src.js"></script>
+    <script src="dist/lib/Rx.js"></script>
+    <script src="dist/lib/angular2.dev.js"></script>
+    <script src="dist/lib/http.dev.js"></script>
 
     <!-- 2. Configure SystemJS -->
     <script>
@@ -32,7 +29,7 @@
                 }
             }
         });
-        System.import('app/app.component')
+        System.import('app/main')
                 .then(null, console.error.bind(console));
     </script>
 </body>

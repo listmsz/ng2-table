@@ -1,12 +1,13 @@
 import {Injectable} from "angular2/core";
 @Injectable()
 export class FiltersService {
-    public filters = [];
-    update(k, v) {
-        this.filters[k] = v;
-    };
+  public filters:Array<any> = [];
 
-    get() {
-        return this.filters;
-    }
+  update(k:String, v:String) {
+    this.filters[k] = v;
+  };
+
+  get():Array<any> {
+    return this.filters;
+  }
 }

@@ -2,26 +2,26 @@ import {Pipe} from 'angular2/core';
 import {ResourceService} from "../services/resource-service";
 
 @Pipe({
-    name: 'pagination'
+  name: 'pagination'
 })
 
 export class PaginationPipe {
-  constructor(public resource: ResourceService) {
+  constructor(public resource:ResourceService) {
+  }
+
+  transform(value, [filters]) {
+    let range = 10;
+    if (typeof value === 'undefined') {
+      return;
+    }
+    ResourceService.getPipedData().emit(value.length);
+    let copiedArr = value.slice();
+
+    if (typeof filters !== 'undefined') {
+      range = filters.range;
+      copiedArr = value.slice(range * (filters.page - 1));
     }
 
-    transform(value, [filters]) {
-        let range = 10;
-        if (typeof value === 'undefined') {
-            return;
-        }
-        ResourceService.getPipedData().emit(value.length);
-        let copiedArr = value.slice();
-
-        if(typeof filters !== 'undefined') {
-            range = filters.range;
-            copiedArr = value.slice(range * (filters.page - 1));
-        }
-        
-        return copiedArr.splice(0, range);
-    }
+    return copiedArr.splice(0, range);
+  }
 }

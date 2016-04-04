@@ -3,7 +3,13 @@ import {FiltersService} from "../../services/filters-service";
 
 @Component({
   selector: 'table-header',
-  templateUrl: 'app///components/header/header.html'
+  template: `
+  <input type="text"
+       placeholder="Search for {{ key }}"
+       class="ng2-table__input"
+       #input
+       (input)="update.emit({value: input.value, key: key})"
+>`
 })
 
 export class Header implements OnInit{

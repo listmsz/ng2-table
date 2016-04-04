@@ -1,0 +1,14 @@
+language: node_js
+node_js:
+  - "5"
+  - "4"
+script:
+    - node_modules/karma/bin/karma start karma.conf.js --single-run
+before_install:
+    - export DISPLAY=:99.0
+    - sh -e /etc/init.d/xvfb start
+before_script:
+    - npm install
+#    - node_modules/typescript/bin/tsc -p . uncomment when typescript error will be fixed
+notifications:
+  email: false
